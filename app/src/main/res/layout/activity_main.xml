@@ -42,6 +42,7 @@
             android:layout_marginTop="60dp">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/search"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_columnWeight="1"
@@ -75,6 +76,7 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
+                android:id="@+id/artist"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_columnWeight="1"
