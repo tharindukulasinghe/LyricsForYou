@@ -21,11 +21,14 @@ public class Search extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    SearchViewModel itemViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        SearchDataSource.phrase = "";
+
 
         searchView = (SearchView) findViewById(R.id.search_view);
 
@@ -40,24 +43,31 @@ public class Search extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),1);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        itemViewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+        SearchViewModel.phrase = "";
+        //SearchViewModel itemViewModel = ViewModelProviders.of(Search.this).get(SearchViewModel.class);
+
+
+        final SearchAdapter adapter = new SearchAdapter(Search.this);
+
+        recyclerView.setAdapter(adapter);
+
+        itemViewModel.itemPagedList.observe(Search.this, new Observer<PagedList<Lyric>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<Lyric> items) {
+                adapter.submitList(items);
+            }
+        });
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                SearchDataSource.phrase = query;
                 Toast.makeText(Search.this, query, Toast.LENGTH_LONG).show();
-                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),1);
-                recyclerView.addItemDecoration(dividerItemDecoration);
-                SearchViewModel.phrase = query;
-                SearchViewModel itemViewModel = ViewModelProviders.of(Search.this).get(SearchViewModel.class);
-                final SearchAdapter adapter = new SearchAdapter(Search.this);
-
-                itemViewModel.itemPagedList.observe(Search.this, new Observer<PagedList<Lyric>>() {
-                    @Override
-                    public void onChanged(@Nullable PagedList<Lyric> items) {
-                        adapter.submitList(items);
-                    }
-                });
-
+                adapter.getCurrentList().getDataSource().invalidate();
                 recyclerView.setAdapter(adapter);
+
 
                 return false;
             }
@@ -65,6 +75,7 @@ public class Search extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //    adapter.getFilter().filter(newText);
+
                 return false;
             }
         });

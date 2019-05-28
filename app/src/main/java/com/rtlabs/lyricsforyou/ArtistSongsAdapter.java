@@ -16,11 +16,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemViewHolder> {
+public class ArtistSongsAdapter extends PagedListAdapter<Lyric, ArtistSongsAdapter.ItemViewHolder> {
 
     private Context mCtx;
 
-    protected SearchAdapter(Context mCtx) {
+    protected ArtistSongsAdapter(Context mCtx) {
         super(DIFF_CALLBACK);
         this.mCtx = mCtx;
     }
@@ -28,7 +28,7 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.search_item, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.artist_songs_item, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -40,7 +40,6 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
         if (item != null) {
 
             holder.textView.setText(item.title);
-            holder.textViewArtist.setText(item.artist);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -76,12 +75,10 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
-        TextView textViewArtist;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textViewName);
-            textViewArtist = itemView.findViewById(R.id.textViewArtist);
         }
     }
 }

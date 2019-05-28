@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +39,7 @@ public class Artists extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class Artists extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
+        searchView = (SearchView) findViewById(R.id.search_view);
 
         recyclerView = findViewById(R.id.my_recycler_view);
         layoutManager = new LinearLayoutManager(this);
@@ -58,6 +60,7 @@ public class Artists extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
+        SearchViewModel.phrase = "";
         final ItemAdapter adapter = new ItemAdapter(this);
 
         itemViewModel.itemPagedList.observe(this, new Observer<PagedList<Item>>() {
@@ -68,6 +71,26 @@ public class Artists extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ItemDataSource.phrase = query;
+                Toast.makeText(Artists.this, query, Toast.LENGTH_LONG).show();
+                adapter.getCurrentList().getDataSource().invalidate();
+                recyclerView.setAdapter(adapter);
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //    adapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
     }
 
 
@@ -80,5 +103,7 @@ public class Artists extends AppCompatActivity {
 
         return true;
     }
+
+
 
 }
