@@ -1,7 +1,5 @@
 package com.rtlabs.lyricsforyou;
 
-import android.app.Activity;
-import android.app.Application;
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +15,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemViewHolder> {
+public class ItemAdapter extends PagedListAdapter<Item, ItemAdapter.ItemViewHolder> {
 
     private Context mCtx;
 
-    protected SearchAdapter(Context mCtx) {
+    protected ItemAdapter(Context mCtx) {
         super(DIFF_CALLBACK);
         this.mCtx = mCtx;
     }
@@ -29,29 +27,27 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.search_item, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerview_item, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 
-        Lyric item = getItem(position);
+        Item item = getItem(position);
 
         if (item != null) {
 
-            holder.textView.setText(item.title);
-            holder.textViewArtist.setText(item.artist);
+            holder.textView.setText(item._id);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mCtx, MainLyricScreen.class);
-
-                    intent.putExtra("Lyric", item);
+                    Intent intent = new Intent(mCtx, ArtistSongs.class);
+                    intent.putExtra("Artist", item);
                     mCtx.startActivity(intent);
+
                 }
             });
-
 
         } else {
             Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
@@ -60,15 +56,15 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
     }
 
 
-    private static DiffUtil.ItemCallback<Lyric> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<Lyric>() {
+    private static DiffUtil.ItemCallback<Item> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Item>() {
                 @Override
-                public boolean areItemsTheSame(Lyric oldItem, Lyric newItem) {
-                    return oldItem.title == newItem.artist;
+                public boolean areItemsTheSame(Item oldItem, Item newItem) {
+                    return oldItem._id == newItem._id;
                 }
 
                 @Override
-                public boolean areContentsTheSame(Lyric oldItem, Lyric newItem) {
+                public boolean areContentsTheSame(Item oldItem, Item newItem) {
                     return oldItem.equals(newItem);
                 }
             };
@@ -77,12 +73,10 @@ public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemVie
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
-        TextView textViewArtist;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textViewName);
-            textViewArtist = itemView.findViewById(R.id.textViewArtist);
         }
     }
 }

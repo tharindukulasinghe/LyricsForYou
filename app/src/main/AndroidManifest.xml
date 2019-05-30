@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ArtistSongs"></activity>
+        <activity android:name=".SubmitLyricScreen"></activity>
+        <activity android:name=".GenreResultScreen" />
+        <activity android:name=".GenreScreen" />
+        <activity android:name=".TrendingScreen" />
+        <activity android:name=".ArtistSongs" />
         <activity android:name=".MainLyricScreen" />
         <activity android:name=".Search" />
-        <activity android:name=".Artists">
-        </activity>
+        <activity android:name=".Artists" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

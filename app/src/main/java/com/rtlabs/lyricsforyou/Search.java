@@ -13,6 +13,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Search extends AppCompatActivity {
@@ -23,12 +25,23 @@ public class Search extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     SearchViewModel itemViewModel;
 
+    ProgressBar progressBar;
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         SearchDataSource.phrase = "";
 
+        progressBar = findViewById(R.id.pb);
 
         searchView = (SearchView) findViewById(R.id.search_view);
 
@@ -67,15 +80,11 @@ public class Search extends AppCompatActivity {
                 Toast.makeText(Search.this, query, Toast.LENGTH_LONG).show();
                 adapter.getCurrentList().getDataSource().invalidate();
                 recyclerView.setAdapter(adapter);
-
-
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //    adapter.getFilter().filter(newText);
-
                 return false;
             }
         });

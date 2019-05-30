@@ -9,4 +9,6 @@ public class Lyric implements Serializable {
     public String lyric;
     public String _id;
     public String genre;
+    public double ratingstotal;
+    public int totalratings;
 }

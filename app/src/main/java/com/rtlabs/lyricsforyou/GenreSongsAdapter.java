@@ -1,6 +1,5 @@
 package com.rtlabs.lyricsforyou;
 
-import android.app.Activity;
 import android.app.Application;
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
@@ -17,11 +16,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-public class SearchAdapter extends PagedListAdapter<Lyric, SearchAdapter.ItemViewHolder> {
+public class GenreSongsAdapter extends PagedListAdapter<Lyric, GenreSongsAdapter.ItemViewHolder> {
 
     private Context mCtx;
 
-    protected SearchAdapter(Context mCtx) {
+    protected GenreSongsAdapter(Context mCtx) {
         super(DIFF_CALLBACK);
         this.mCtx = mCtx;
     }

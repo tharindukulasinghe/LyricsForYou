@@ -70,6 +70,7 @@ public class Artists extends AppCompatActivity {
             }
         });
 
+
         recyclerView.setAdapter(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -17,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
         CardView search_card = (CardView) findViewById(R.id.search);
 
+        CardView trending_card = (CardView) findViewById(R.id.trending);
+
+        CardView genre_card = (CardView) findViewById(R.id.genres);
+
+        CardView submit_card = (CardView) findViewById(R.id.submit);
+
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +36,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Search.class);
+                startActivity(intent);
+            }
+        });
+
+        trending_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,TrendingScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        genre_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,GenreScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        submit_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SubmitLyricScreen.class);
                 startActivity(intent);
             }
         });
