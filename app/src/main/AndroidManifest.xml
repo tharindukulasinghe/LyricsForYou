@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubmitLyricScreen"></activity>
+        <activity android:name=".AboutScreen"></activity>
+        <activity android:name=".SubmitLyricScreen" />
         <activity android:name=".GenreResultScreen" />
         <activity android:name=".GenreScreen" />
         <activity android:name=".TrendingScreen" />

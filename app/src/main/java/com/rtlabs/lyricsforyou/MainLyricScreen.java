@@ -60,6 +60,8 @@ public class MainLyricScreen extends AppCompatActivity {
             public void onClick(View arg0) {
                 //Getting the rating and displaying it on the toast
                 String rating=String.valueOf(ratingbar.getRating());
+
+                Toast.makeText(getApplicationContext(),"Rating updated!",Toast.LENGTH_LONG);
                 rateLyric(rating);
 
 

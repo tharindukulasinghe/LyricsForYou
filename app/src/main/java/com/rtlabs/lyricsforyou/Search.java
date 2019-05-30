@@ -77,7 +77,7 @@ public class Search extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchDataSource.phrase = query;
-                Toast.makeText(Search.this, query, Toast.LENGTH_LONG).show();
+                Toast.makeText(Search.this, "Searching for : " +query, Toast.LENGTH_LONG).show();
                 adapter.getCurrentList().getDataSource().invalidate();
                 recyclerView.setAdapter(adapter);
                 return false;

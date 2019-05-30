@@ -8,6 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         CardView genre_card = (CardView) findViewById(R.id.genres);
 
         CardView submit_card = (CardView) findViewById(R.id.submit);
+
+        CardView about_card = (CardView) findViewById(R.id.about);
 
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,SubmitLyricScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        about_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AboutScreen.class);
                 startActivity(intent);
             }
         });
